@@ -40,8 +40,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'popular'
+    # Local Apps                        (v0.1)
+    'popular',
+
+    # Local Apps (my project's apps)    (v1)
+    'base',
+
+    # Third-Party Apps
+    'rest_framework',
+    # 'rest_framework.authtoken', 
+    'mapbox_location_field', # https://pypi.org/project/django-mapbox-location-field/
+    'phone_field', # https://pypi.org/project/django-phone-field/
 ]
+
+MAPBOX_KEY = "pk.eyJ1IjoibWlnaHR5c2hhcmt5IiwiYSI6ImNqd2duaW4wMzBhcWI0M3F1MTRvbHB0dWcifQ.1sDAD43q0ktK1Sr374xGfw" 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

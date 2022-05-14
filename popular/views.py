@@ -9,7 +9,7 @@ def index(request):
     json_data = """{
     "total_size": 0,
     "type_id": 35,
-    "offset": 76,
+    "offset": 0,
     "products": [
         {
             "id": 1,
