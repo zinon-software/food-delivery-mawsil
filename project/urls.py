@@ -19,10 +19,45 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
+
+from allauth.socialaccount.providers.facebook.views import FacebookOAuth2Adapter
+from dj_rest_auth.registration.views import SocialLoginView
+
+from allauth.socialaccount.providers.twitter.views import TwitterOAuthAdapter
+from dj_rest_auth.registration.views import SocialLoginView
+from dj_rest_auth.social_serializers import TwitterLoginSerializer
+
+
+class TwitterLogin(SocialLoginView):
+    serializer_class = TwitterLoginSerializer
+    adapter_class = TwitterOAuthAdapter
+
+class FacebookLogin(SocialLoginView):
+    adapter_class = FacebookOAuth2Adapter
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('popular.urls')),
     path('', include('base.api.urls')),
+
+    path('api/auth/', include('dj_rest_auth.urls')),
+    path('api/auth/registration/', include('dj_rest_auth.registration.urls')),
+
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+
+    path('api/auth/facebook/', FacebookLogin.as_view(), name='fb_login'),
+    path('api/auth/twitter/', TwitterLogin.as_view(), name='twitter_login'),
 ]
 
 
